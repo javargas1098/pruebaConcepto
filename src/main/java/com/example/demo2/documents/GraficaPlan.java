@@ -1,8 +1,5 @@
 package com.example.demo2.documents;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,28 +30,28 @@ public class GraficaPlan {
     private String nombreEjeX;
 
     @Column(name = "ejey")
-    private String nombreEjey;
+    private String nombreEjeY;
 
     @Column(name = "tipo_datos")
     private String tipoDatos;
 
     @Transient
-    List<Ejes> ejes = new LinkedList<>();
+    private String ejes;
 
     @Transient
-    List<DataEjeY> dataEjeY = new LinkedList<>();
+    private String dataEjeY;
 
     public GraficaPlan() {
     }
 
-    public GraficaPlan(String id, String titulo, String carId, String tipoGrafica, String nombreEjeX, String nombreEjey,
+    public GraficaPlan(String id, String titulo, String carId, String tipoGrafica, String nombreEjeX, String nombreEjeY,
             String tipoDatos) {
         this.id = id;
         this.titulo = titulo;
         this.carId = carId;
         this.tipoGrafica = tipoGrafica;
         this.nombreEjeX = nombreEjeX;
-        this.nombreEjey = nombreEjey;
+        this.nombreEjeY = nombreEjeY;
         this.tipoDatos = tipoDatos;
     }
 
@@ -98,12 +95,12 @@ public class GraficaPlan {
         this.nombreEjeX = nombreEjeX;
     }
 
-    public String getNombreEjey() {
-        return nombreEjey;
+    public String getnombreEjeY() {
+        return nombreEjeY;
     }
 
-    public void setNombreEjey(String nombreEjey) {
-        this.nombreEjey = nombreEjey;
+    public void setnombreEjeY(String nombreEjeY) {
+        this.nombreEjeY = nombreEjeY;
     }
 
     public String getTipoDatos() {
@@ -114,20 +111,19 @@ public class GraficaPlan {
         this.tipoDatos = tipoDatos;
     }
 
-    public List<Ejes> getEjes() {
+    public String getEjes() {
         return ejes;
     }
 
-    public void setEjes(List<Ejes> ejes) {
+    public void setEjes(String ejes) {
         this.ejes = ejes;
     }
 
-    public List<DataEjeY> getDataEjeY() {
+    public String getDataEjeY() {
         return dataEjeY;
     }
 
-    public void setDataEjeY(List<DataEjeY> dataEjeY) {
+    public void setDataEjeY(String dataEjeY) {
         this.dataEjeY = dataEjeY;
     }
-
 }

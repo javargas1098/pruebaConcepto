@@ -10,7 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 @Entity
-@Table(name = " CR_CAMPOS")
+@Table(name = "CR_CAMPOS")
 public class Campos {
 
     @Id
@@ -20,7 +20,7 @@ public class Campos {
 
     private String campo;
 
-    @Column(name = "ejes_id")
+    @Column(name = "ejesid")
     private String ejesId;
 
     public Campos() {

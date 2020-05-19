@@ -33,12 +33,10 @@ public class StringGenerator implements IdentifierGenerator, Configurable {
             case "GraficaPlan":
                 Variables.GRAFICAPLANIDGLOBAL.label = prefix + "-" + (max + 1);
                 break;
-            case "Eje":
-
+            case "Ejes":
                 Variables.EJESGRAFICAIDGLOBAL.label = prefix + "-" + (max + 1);
                 break;
             case "DataEjeY":
-
                 Variables.DATAEJEYIDGLOBAL.label = prefix + "-" + (max + 1);
                 break;
             default:

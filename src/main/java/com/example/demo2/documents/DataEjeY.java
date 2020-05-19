@@ -20,6 +20,7 @@ public class DataEjeY {
     @GenericGenerator(name = "prod-generator-activi", parameters = @Parameter(name = "prefix", value = "DtY"), strategy = "com.example.demo2.documents.StringGenerator")
     private String id;
 
+    @Column(name = "nombre_eje")
     private String nombreEje;
 
     @Column(name = "ejeyid")

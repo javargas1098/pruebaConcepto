@@ -20,7 +20,7 @@ public class Ejes {
     @GenericGenerator(name = "prod-generator-activi", parameters = @Parameter(name = "prefix", value = "E"), strategy = "com.example.demo2.documents.StringGenerator")
     private String id;
 
-    @Column(name = "tipo_grafica")
+    @Column(name = "grafica_id")
     private String graficaId;
 
     private String eje;

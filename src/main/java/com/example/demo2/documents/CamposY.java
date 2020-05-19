@@ -10,7 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 @Entity
-@Table(name = " PUNTOSY")
+@Table(name = "CR_PUNTOSY")
 public class CamposY {
     @Id
     @GeneratedValue(generator = "prod-generator-activi")
@@ -19,7 +19,7 @@ public class CamposY {
 
     private Float campo;
 
-    @Column(name = "ejesyid")
+    @Column(name = "ejeyid")
     private String ejeyId;
 
     public CamposY() {

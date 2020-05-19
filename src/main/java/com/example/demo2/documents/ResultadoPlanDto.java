@@ -11,9 +11,6 @@ public class ResultadoPlanDto implements Serializable {
 
     private String graficas;
 
-    String ejes;
-
-    String dataEjeY;
 
     public String getGraficas() {
         return graficas;
@@ -21,22 +18,6 @@ public class ResultadoPlanDto implements Serializable {
 
     public void setGraficas(String graficas) {
         this.graficas = graficas;
-    }
-
-    public String getEjes() {
-        return ejes;
-    }
-
-    public void setEjes(String ejes) {
-        this.ejes = ejes;
-    }
-
-    public String getDataEjeY() {
-        return dataEjeY;
-    }
-
-    public void setDataEjeY(String dataEjeY) {
-        this.dataEjeY = dataEjeY;
     }
 
  
