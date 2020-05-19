@@ -27,7 +27,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -54,24 +56,27 @@ public class ResultadoPlanController {
 
     private static final Logger logger = Logger.getLogger(ResultadoPlanController.class.getName());
 
-    @PostMapping(consumes = "application/json")
+    @CrossOrigin
+    @PostMapping("/create")
     @Transactional
-    public ResponseEntity<String> saveDiagrama(List<ResultadoPlanDto> diagramas) {
-        diagramas.stream().forEach(diagrama -> {
-            GraficaPlan graficaPlan;
-            ObjectMapper objectMapper = new ObjectMapper();
-            try {
-                graficaPlan = convertToEntity(diagrama);
-                List<Ejes> ejes = objectMapper.readValue(diagrama.getEjes(), new TypeReference<List<Ejes>>() {
+    public ResponseEntity<String> saveDiagrama(@RequestBody ResultadoPlanDto diagramas) {
+        System.out.println("entre");
+        ObjectMapper objectMapper = new ObjectMapper();
+        System.out.println("llege acaaaa");
+        try {
+            List<GraficaPlan> diagrama = objectMapper.readValue(diagramas.getGraficas(), new TypeReference<List<Ejes>>() {
+            });
+            diagrama.stream().forEach(dg -> {
+                /* List<Ejes> ejes = objectMapper.readValue(dg.getEjes(), new TypeReference<List<Ejes>>() {
                 });
                 List<DataEjeY> ejesY = objectMapper.readValue(diagrama.getDataEjeY(),
                         new TypeReference<List<DataEjeY>>() {
-                        });
+                        }); */
                 Campos data = new Campos();
                 CamposY dataY = new CamposY();
-                graficaPlanServices.agregarAccion(graficaPlan);
+                graficaPlanServices.agregarAccion(dg);
                 Variables constans = Variables.GRAFICAPLANIDGLOBAL;
-                ejes.stream().forEach(eje -> {
+                dg.getEjes().stream().forEach(eje -> {
                     eje.setId("1");
                     eje.setGraficaId(constans.getLabel());
                     ejesServices.agregarAccion(eje);
@@ -86,7 +91,8 @@ public class ResultadoPlanController {
                 });
                 Variables constansEjes = Variables.EJESGRAFICAIDGLOBAL;
                 System.out.println(constansEjes);
-                ejesY.stream().forEach(dataEje -> {
+                dg.getDataEjeY()
+                .stream().forEach(dataEje -> {
                     dataEje.setId("1");
                     dataEje.setEjeyId(constansEjes.getLabel());
                     dataEjeServices.agregarAccion(dataEje);
@@ -99,42 +105,41 @@ public class ResultadoPlanController {
 
                     });
                 });
-            } catch (IOException | ParseException e) {
-                if (logger.isLoggable(Level.SEVERE)) {
-                    logger.log(Level.SEVERE, "Error", e);
-                }
+            });
+            
+        } catch (IOException e) {
+            if (logger.isLoggable(Level.SEVERE)) {
+                logger.log(Level.SEVERE, "Error", e);
             }
-        });
+        }
 
         return new ResponseEntity<>("El diagrama fue actualizado exitosamente", HttpStatus.OK);
 
     }
 
-    private GraficaPlan convertToEntity(ResultadoPlanDto resultadoPlanDto) throws ParseException {
-        if (resultadoPlanDto == null) {
-            throw new ParseException("resultadoPlanDto is null", 0);
-        }
-        GraficaPlan data = modelMapper.map(resultadoPlanDto, GraficaPlan.class);
-        data.setId(resultadoPlanDto.getId());
-        data.setCarId(resultadoPlanDto.getCarId());
-        data.setNombreEjeX(resultadoPlanDto.getNombreEjeX());
-        data.setNombreEjey(resultadoPlanDto.getNombreEjey());
-        data.setTitulo(resultadoPlanDto.getTitulo());
-        data.setTipoDatos(resultadoPlanDto.getTipoDatos());
-        data.setTipoGrafica(resultadoPlanDto.getTipoGrafica());
-        return data;
-    }
-
-    private ResultadoPlanDto convertToDto(GraficaPlan data) {
-        ResultadoPlanDto planDeAccionDto = modelMapper.map(data, ResultadoPlanDto.class);
-        planDeAccionDto.setId(data.getId());
-        planDeAccionDto.setCarId(data.getCarId());
-        planDeAccionDto.setNombreEjeX(data.getNombreEjeX());
-        planDeAccionDto.setNombreEjey(data.getNombreEjey());
-        planDeAccionDto.setTitulo(data.getTitulo());
-        planDeAccionDto.setTipoDatos(data.getTipoDatos());
-        planDeAccionDto.setTipoGrafica(data.getTipoGrafica());
-        return planDeAccionDto;
-    }
+    /*
+     * private GraficaPlan convertToEntity(ResultadoPlanDto resultadoPlanDto) throws
+     * ParseException { if (resultadoPlanDto == null) { throw new
+     * ParseException("resultadoPlanDto is null", 0); } GraficaPlan data =
+     * modelMapper.map(resultadoPlanDto, GraficaPlan.class);
+     * data.setId(resultadoPlanDto.getId());
+     * data.setCarId(resultadoPlanDto.getCarId());
+     * data.setNombreEjeX(resultadoPlanDto.getNombreEjeX());
+     * data.setNombreEjey(resultadoPlanDto.getNombreEjey());
+     * data.setTitulo(resultadoPlanDto.getTitulo());
+     * data.setTipoDatos(resultadoPlanDto.getTipoDatos());
+     * data.setTipoGrafica(resultadoPlanDto.getTipoGrafica()); return data; }
+     * 
+     * private ResultadoPlanDto convertToDto(GraficaPlan data) { ResultadoPlanDto
+     * planDeAccionDto = modelMapper.map(data, ResultadoPlanDto.class);
+     * planDeAccionDto.setId(data.getId());
+     * planDeAccionDto.setCarId(data.getCarId());
+     * planDeAccionDto.setNombreEjeX(data.getNombreEjeX());
+     * planDeAccionDto.setNombreEjey(data.getNombreEjey());
+     * planDeAccionDto.setTitulo(data.getTitulo());
+     * planDeAccionDto.setTipoDatos(data.getTipoDatos());
+     * planDeAccionDto.setTipoGrafica(data.getTipoGrafica()); return
+     * planDeAccionDto; }
+     */
 
 }
