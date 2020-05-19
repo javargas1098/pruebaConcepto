@@ -26,4 +26,8 @@ public class EjesServices {
         return ejesRepository.findById(id);
     }
 
+    public Iterable<Ejes> findByCrId(String id, String graficaId) {
+        return ejesRepository.findByCarId(id, graficaId);
+    }
+
 }

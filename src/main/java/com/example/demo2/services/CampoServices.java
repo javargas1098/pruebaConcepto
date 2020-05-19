@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class CampoServices {
     @Autowired
     private CamposRepository dataEjeRepository;
-    
+
     public List<Campos> findAll() {
         return dataEjeRepository.findAll();
     }
@@ -24,6 +24,10 @@ public class CampoServices {
 
     public Optional<Campos> findById(String id) {
         return dataEjeRepository.findById(id);
+    }
+
+    public Iterable<Campos> findByCrId(String ejeId) {
+        return dataEjeRepository.findByCarId(ejeId);
     }
 
 }

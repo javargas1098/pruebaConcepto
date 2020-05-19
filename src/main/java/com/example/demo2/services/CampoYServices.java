@@ -25,4 +25,8 @@ public class CampoYServices {
     public Optional<CamposY> findById(String id) {
         return dataEjeRepository.findById(id);
     }
+
+    public Iterable<CamposY> findByCrId(String ejeyId) {
+        return dataEjeRepository.findByCarId(ejeyId);
+    }
 }

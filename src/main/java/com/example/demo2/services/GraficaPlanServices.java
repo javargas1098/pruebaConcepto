@@ -29,4 +29,8 @@ public class GraficaPlanServices {
     public Optional<GraficaPlan> findById(String id) {
         return graficaPlanRepository.findById(id);
     }
+
+	public Iterable<GraficaPlan> findByCrId(String id) {
+		return graficaPlanRepository.findByCarId(id);
+	}
 }

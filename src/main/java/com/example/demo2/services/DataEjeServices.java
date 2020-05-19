@@ -26,4 +26,8 @@ public class DataEjeServices {
         return dataEjeRepository.findById(id);
     }
 
+    public Iterable<DataEjeY> findByCrId(String id, String graficaId) {
+        return dataEjeRepository.findByCarId(id, graficaId);
+    }
+
 }

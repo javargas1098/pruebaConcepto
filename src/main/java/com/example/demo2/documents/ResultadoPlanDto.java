@@ -10,6 +10,8 @@ public class ResultadoPlanDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String graficas;
+    
+    private String resultadoPlan;
 
 
     public String getGraficas() {
@@ -18,6 +20,14 @@ public class ResultadoPlanDto implements Serializable {
 
     public void setGraficas(String graficas) {
         this.graficas = graficas;
+    }
+
+    public String getResultadoPlan() {
+        return resultadoPlan;
+    }
+
+    public void setResultadoPlan(String resultadoPlan) {
+        this.resultadoPlan = resultadoPlan;
     }
 
  
